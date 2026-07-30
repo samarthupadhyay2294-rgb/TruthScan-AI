@@ -12,7 +12,7 @@ services:
       - key: FRONTEND_URL
         value:
       - key: CORS_ORIGINS
-        value: https://truthlens-frontend.onrender.com
+        value: 
       - key: ENVIRONMENT
         value: production
       - key: SMTP_HOST
