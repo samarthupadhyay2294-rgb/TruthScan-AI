@@ -40,8 +40,3 @@ services:
         source: /*
         destination: /index.html
 
-databases:
-  - name: truthlens-db
-    databaseName: truthlens
-    user: truthlens
-    plan: free
