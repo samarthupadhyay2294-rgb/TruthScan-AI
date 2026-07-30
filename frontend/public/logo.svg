@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB"/>
+      <stop offset="100%" style="stop-color:#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="40" fill="url(#grad)"/>
+  <circle cx="100" cy="100" r="50" stroke="white" stroke-width="8" fill="none"/>
+  <circle cx="100" cy="100" r="18" fill="white"/>
+  <path d="M100 50V75M100 125V150M50 100H75M125 100H150" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <text x="100" y="185" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="14" font-weight="600">TruthLens</text>
+</svg>

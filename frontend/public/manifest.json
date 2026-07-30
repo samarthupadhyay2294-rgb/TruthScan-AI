@@ -1,0 +1,17 @@
+{
+  "name": "TruthLens AI",
+  "short_name": "TruthLens",
+  "description": "Advanced fake news detection powered by machine learning",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#2563EB",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

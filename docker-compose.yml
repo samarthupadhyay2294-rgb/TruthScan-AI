@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: truttlens-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://truttlens:truttlens123@db:5432/truttlens
+      - SECRET_KEY=your-secret-key-change-in-production
+      - FRONTEND_URL=http://localhost:3000
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=your-email@gmail.com
+      - SMTP_PASSWORD=your-email-password
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/reports:/app/reports
+      - ./backend/app/ml/models:/app/app/ml/models
+    depends_on:
+      - db
+    networks:
+      - truttlens-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: truttlens-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+    networks:
+      - truttlens-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    container_name: truttlens-db
+    environment:
+      - POSTGRES_USER=truttlens
+      - POSTGRES_PASSWORD=truttlens123
+      - POSTGRES_DB=truttlens
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - truttlens-network
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+
+networks:
+  truttlens-network:
+    driver: bridge
