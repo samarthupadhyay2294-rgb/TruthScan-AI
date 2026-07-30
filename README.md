@@ -1,241 +1,243 @@
-# TruthLens AI
+# TruthScan AI
 
-An AI-powered fake news detection platform that uses machine learning to analyze news articles and provide credibility assessments with confidence scores and detailed indicators.
+<p align="center">
+  <strong>Turn news text into a clear, data-informed credibility assessment.</strong>
+</p>
 
-## Features
+<p align="center">
+  <a href="https://truthscan-ai-froentand.onrender.com"><strong>Explore the live app</strong></a>
+  &nbsp;•&nbsp;
+  <a href="https://truthscan-ai-backend.onrender.com/docs">API documentation</a>
+  &nbsp;•&nbsp;
+  <a href="#getting-started">Run locally</a>
+</p>
 
-- **AI-Powered Analysis**: Advanced ML models analyze text patterns, sources, and linguistic markers
-- **Real-Time Detection**: Instant credibility scores and detailed breakdowns
-- **Detailed Reports**: Comprehensive analysis with confidence scores and key indicators
-- **History Tracking**: Searchable history with trend visualization
-- **File Upload Support**: Analyze TXT, PDF, and DOCX files
-- **User Authentication**: Secure JWT-based authentication
-- **Admin Dashboard**: User management and platform analytics
-- **Responsive Design**: Beautiful UI built with React, TypeScript, and Tailwind CSS
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white" alt="React 19" />
+  <img src="https://img.shields.io/badge/FastAPI-Python-009688?logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/ML-Linear%20SVM-FF6F00" alt="Linear SVM" />
+  <img src="https://img.shields.io/badge/Deployed%20on-Render-46E3B7?logo=render&logoColor=white" alt="Deployed on Render" />
+</p>
 
-## Tech Stack
+> **Live URL:** [https://truthscan-ai-froentand.onrender.com](https://truthscan-ai-froentand.onrender.com)
 
-### Backend
-- **Framework**: FastAPI (Python 3.11)
-- **Database**: PostgreSQL with SQLAlchemy ORM
-- **Authentication**: JWT tokens with bcrypt password hashing
-- **ML Model**: Linear SVM with TF-IDF vectorization
-- **File Processing**: PyPDF2, python-docx for document parsing
-- **Email**: SMTP integration for password reset
+TruthScan AI is a full-stack fake-news analysis platform. Paste an article or upload a document and receive a machine-learning prediction, confidence score, explanatory keywords, language signals, and optional account-based history. It is designed to support critical reading—not to replace professional fact-checking.
 
-### Frontend
-- **Framework**: React 18 with TypeScript
-- **UI Library**: Shadcn/ui components
-- **Styling**: Tailwind CSS
-- **State Management**: React Context API
-- **Routing**: React Router v6
-- **HTTP Client**: Axios
-- **Charts**: Recharts
-- **Animations**: Framer Motion
-- **Notifications**: Sonner (toast)
-- **Icons**: Lucide React
+## Highlights
 
-## Project Structure
+| Capability | What it does |
+| --- | --- |
+| News analysis | Classifies supplied text as **Real** or **Fake** with a confidence score. |
+| Explainable results | Surfaces influential keywords, suspicious language, sentiment, bias, summary, and credibility signals. |
+| File upload | Reads `.txt`, `.pdf`, and `.docx` documents (up to 10 MB) before analysis. |
+| Guest-friendly | Visitors can analyze content without creating an account. |
+| Accounts and history | JWT authentication, saved prediction history, profile management, and password-reset flow. |
+| Dashboard and reports | Personal activity overview plus exportable report functionality for signed-in users. |
+| Admin tools | User management and aggregate platform analytics for administrators. |
 
-```
-TruthLens-AI/
-├── backend/
-│   ├── app/
-│   │   ├── api/          # API endpoints
-│   │   ├── core/         # Configuration, security, logging
-│   │   ├── database/     # Database models and base
-│   │   ├── ml/           # ML predictor and models
-│   │   ├── schemas/      # Pydantic schemas
-│   │   ├── services/     # Business logic layer
-│   │   └── utils/        # Utility functions
-│   ├── alembic/          # Database migrations
-│   ├── tests/            # Backend tests
-│   ├── main.py           # FastAPI application entry
-│   ├── requirements.txt  # Python dependencies
-│   └── Dockerfile        # Backend Docker configuration
-├── frontend/
-│   ├── src/
-│   │   ├── app/          # App configuration (router, providers)
-│   │   ├── components/   # React components
-│   │   ├── context/      # React contexts
-│   │   ├── hooks/        # Custom React hooks
-│   │   ├── layouts/      # Page layouts
-│   │   ├── lib/          # Utilities and constants
-│   │   ├── pages/        # Page components
-│   │   ├── services/     # API service layer
-│   │   └── types/        # TypeScript types
-│   ├── public/           # Static assets
-│   ├── package.json      # Node dependencies
-│   ├── vite.config.ts    # Vite configuration
-│   └── Dockerfile        # Frontend Docker configuration
-├── docker-compose.yml    # Docker Compose configuration
-└── render.yaml           # Render deployment configuration
+## How it works
+
+```mermaid
+flowchart LR
+  A["Paste text or upload a file"] --> B["FastAPI API"]
+  B --> C["Text preprocessing"]
+  C --> D["TF-IDF vectorizer"]
+  D --> E["Linear SVM classifier"]
+  E --> F["Prediction + confidence"]
+  F --> G["Keywords, sentiment, bias & credibility signals"]
+  G --> H["Interactive React result screen"]
 ```
 
-## Getting Started
+The model evaluates patterns in the provided text. A prediction is an automated signal and can be wrong; check original reporting, evidence, dates, and trusted fact-checking sources before sharing content or making decisions.
+
+## Technology
+
+**Frontend**
+
+- React 19, TypeScript, Vite, React Router
+- Tailwind CSS and shadcn/ui components
+- Axios, React Context, Framer Motion, Recharts, Sonner, Lucide
+
+**Backend**
+
+- FastAPI, Pydantic Settings, SQLAlchemy (async), Alembic
+- SQLite for local development; PostgreSQL-compatible configuration for production
+- JWT authentication, bcrypt password hashing, rate limiting, CORS middleware
+- scikit-learn Linear SVM and TF-IDF vectorization
+- `pypdf` and `python-docx` for document text extraction
+
+## Project structure
+
+```text
+TruthScan-AI/
+├── frontend/                 # React single-page application
+│   ├── src/pages/            # Analyze, dashboard, history, auth, admin pages
+│   ├── src/components/       # Shared and UI components
+│   ├── src/services/         # API client and feature services
+│   └── src/context/          # Authentication, prediction, and theme state
+├── backend/                  # FastAPI application
+│   ├── app/api/              # HTTP endpoints
+│   ├── app/ai/               # Analysis helpers and report generation
+│   ├── app/ml/               # Predictor, preprocessing, and trained artifacts
+│   ├── app/database/         # Models, sessions, and CRUD operations
+│   ├── app/services/         # Business logic
+│   └── tests/                # API and prediction tests
+└── docker-compose.yml        # Local container orchestration
+```
+
+## Getting started
 
 ### Prerequisites
 
-- Python 3.11+
-- Node.js 18+
-- PostgreSQL 15+
-- npm or yarn
+- Python 3.11 or newer
+- Node.js 18 or newer
+- npm
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd TruthLens-AI
-   ```
-
-2. **Backend Setup**
-   ```bash
-   cd backend
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   cp .env.example .env
-   # Edit .env with your configuration
-   alembic upgrade head
-   uvicorn main:app --reload
-   ```
-
-3. **Frontend Setup**
-   ```bash
-   cd frontend
-   npm install
-   cp .env.example .env
-   # Edit .env with your API URL
-   npm run dev
-   ```
-
-### Using Docker Compose
+### 1. Clone the project
 
 ```bash
-docker-compose up -d
+git clone https://github.com/samarthupadhyay2294-rgb/TruthScan-AI.git
+cd TruthScan-AI
 ```
 
-This will start:
-- Backend API on http://localhost:8000
-- Frontend on http://localhost:3000
-- PostgreSQL database
+### 2. Start the backend
 
-## Environment Variables
-
-### Backend (.env)
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/truttlens
-SECRET_KEY=your-secret-key
-FRONTEND_URL=http://localhost:3000
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
-SMTP_PASSWORD=your-email-password
+```bash
+cd backend
+python -m venv .venv
 ```
 
-### Frontend (.env)
+Activate the environment:
+
+```bash
+# macOS / Linux
+source .venv/bin/activate
+
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+```
+
+Install dependencies and configure the application:
+
+```bash
+pip install -r requirements.txt
+copy .env.example .env          # Windows
+# cp .env.example .env          # macOS / Linux
+uvicorn main:app --reload
+```
+
+The API will be available at `http://127.0.0.1:8000`, with interactive documentation at `http://127.0.0.1:8000/docs`.
+
+### 3. Start the frontend
+
+In a second terminal:
+
+```bash
+cd frontend
+copy .env.example .env          # Windows
+# cp .env.example .env          # macOS / Linux
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite (normally `http://localhost:5173`).
+
+## Configuration
+
+### Frontend environment variables
+
 ```env
-VITE_API_BASE_URL=http://localhost:8000/api
-VITE_APP_NAME=TruthLens AI
+VITE_API_BASE_URL=http://127.0.0.1:8000/api
+VITE_APP_NAME=TruthScan AI
 VITE_APP_VERSION=1.0.0
 ```
 
-## API Documentation
+### Backend environment variables
 
-Once the backend is running, visit:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+```env
+DATABASE_URL=sqlite+aiosqlite:///./truthlens.db
+JWT_SECRET=replace-with-a-long-random-secret
+FRONTEND_URL=http://localhost:5173
+CORS_ORIGINS=http://localhost:5173
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@example.com
+SMTP_PASSWORD=your-app-password
+```
 
-### Main Endpoints
+Never commit secrets or production credentials. Use your hosting provider’s environment-variable dashboard instead.
 
-#### Authentication
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Login and get tokens
-- `POST /api/auth/logout` - Logout (invalidate tokens)
-- `POST /api/auth/refresh` - Refresh access token
-- `POST /api/auth/forgot-password` - Request password reset
-- `POST /api/auth/reset-password` - Reset password
+## API reference
 
-#### Predictions
-- `POST /api/predictions/analyze` - Analyze text for fake news
-- `POST /api/predictions/upload` - Upload and analyze file
+All application routes are prefixed with `/api`.
 
-#### Dashboard
-- `GET /api/dashboard` - Get dashboard statistics
+| Area | Endpoint | Description |
+| --- | --- | --- |
+| Authentication | `POST /api/auth/signup` | Create an account. |
+| Authentication | `POST /api/auth/login` | Sign in and receive a JWT. |
+| Prediction | `POST /api/predict` | Analyze supplied news text. |
+| Upload | `POST /api/upload` | Extract and analyze a TXT, PDF, or DOCX file. |
+| Dashboard | `GET /api/dashboard` | Fetch dashboard statistics. |
+| History | `GET /api/history` | Fetch saved predictions. |
+| Reports | `GET /api/reports` | List user reports. |
+| Profile | `GET /api/profile` | Retrieve the signed-in user’s profile. |
+| Admin | `GET /api/admin/analytics` | Retrieve platform analytics for admins. |
 
-#### History
-- `GET /api/history` - Get user's prediction history
-- `DELETE /api/history/{id}` - Delete history item
+Example request:
 
-#### Reports
-- `GET /api/reports` - List reports
-- `POST /api/reports/{prediction_id}` - Generate report
-- `GET /api/reports/{id}` - Get specific report
-
-#### User
-- `GET /api/users/me` - Get current user profile
-- `PUT /api/users/me` - Update user profile
-- `DELETE /api/users/me` - Delete account
-
-#### Admin
-- `GET /api/admin/users` - List all users
-- `DELETE /api/admin/users/{id}` - Delete user
-- `GET /api/admin/predictions` - List all predictions
-- `GET /api/admin/analytics` - Get platform analytics
-
-## Development
-
-### Running Tests
-
-Backend:
 ```bash
+curl -X POST http://127.0.0.1:8000/api/predict \
+  -H "Content-Type: application/json" \
+  -d '{"text":"Researchers have published a study on urban air quality."}'
+```
+
+For full request and response schemas, use the [live Swagger UI](https://truthscan-ai-backend.onrender.com/docs).
+
+## Deployment on Render
+
+This project can be deployed manually as two services:
+
+1. **Backend:** create a Render Web Service from the repository.
+   - Build command: `cd backend && pip install -r requirements.txt`
+   - Start command: `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT`
+2. **Frontend:** create a Render Static Site.
+   - Build command: `cd frontend && npm ci && npm run build`
+   - Publish directory: `frontend/dist`
+3. In the frontend service’s environment variables, set:
+
+   ```env
+   VITE_API_BASE_URL=https://truthscan-ai-backend.onrender.com/api
+   ```
+
+4. In the backend service’s environment variables, set `FRONTEND_URL` and `CORS_ORIGINS` to:
+
+   ```text
+   https://truthscan-ai-froentand.onrender.com
+   ```
+
+The `/api` suffix is required. Without it, requests to the analyzer route will return `404`.
+
+## Testing and quality checks
+
+```bash
+# Backend tests
 cd backend
 pytest
-```
 
-Frontend:
-```bash
+# Frontend checks
 cd frontend
-npm test
+npm run lint
+npm run build
 ```
-
-### Database Migrations
-
-```bash
-cd backend
-alembic revision --autogenerate -m "description"
-alembic upgrade head
-```
-
-## Deployment
-
-### Docker
-
-Build and run with Docker Compose:
-```bash
-docker-compose up -d --build
-```
-
-### Render
-
-The project includes `render.yaml` for easy deployment on Render.com. Simply connect your repository and Render will automatically deploy both frontend and backend services.
-
-### Manual Deployment
-
-1. Deploy backend to a hosting service (Render, Railway, AWS, etc.)
-2. Deploy frontend to a static hosting service (Vercel, Netlify, etc.)
-3. Update frontend `VITE_API_BASE_URL` to point to backend URL
-4. Update backend `FRONTEND_URL` to point to frontend URL
-
-## License
-
-This project is licensed under the MIT License.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome. Please open an issue to discuss a significant change, then submit a focused pull request with a clear description and relevant tests.
 
-## Support
+## License
 
-For issues and questions, please open an issue on the GitHub repository.
+This project is available under the MIT License. Add a `LICENSE` file to the repository if one has not already been included.
+
+---
+
+Built by [Samarth Upadhyay](https://github.com/samarthupadhyay2294-rgb) · [Open TruthScan AI](https://truthscan-ai-froentand.onrender.com)
